@@ -15,6 +15,7 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Contact from "./pages/Contact";
 import Feedback from "./pages/Feedback";
+import Checkout from "./pages/Checkout";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -37,6 +38,7 @@ const App = () => (
               <Route path="/signup" element={<SignUp />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/feedback" element={<Feedback />} />
+              <Route path="/checkout" element={<Checkout />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
             <Footer />
