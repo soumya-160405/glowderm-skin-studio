@@ -2,10 +2,16 @@ import React from 'react';
 import { X, Plus, Minus, ShoppingBag, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/contexts/CartContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const CartDrawer: React.FC = () => {
   const { items, isCartOpen, setIsCartOpen, removeFromCart, updateQuantity, totalPrice, totalItems } = useCart();
+  const navigate = useNavigate();
+
+  const handleCheckout = () => {
+    setIsCartOpen(false);
+    navigate('/checkout');
+  };
 
   if (!isCartOpen) return null;
 
@@ -112,7 +118,7 @@ const CartDrawer: React.FC = () => {
               <p className="text-sm text-muted-foreground">
                 Shipping and taxes calculated at checkout
               </p>
-              <Button variant="hero" className="w-full" size="lg">
+              <Button variant="hero" className="w-full" size="lg" onClick={handleCheckout}>
                 Proceed to Checkout
               </Button>
               <Button
