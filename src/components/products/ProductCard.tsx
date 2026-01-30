@@ -15,13 +15,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     >
       {/* Image */}
       <div className="aspect-square bg-sage-light relative overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center p-8">
-          <div className="text-center">
-            <span className="font-serif text-sage-dark text-lg font-medium">
-              {product.name.split(' ').slice(0, 2).join(' ')}
-            </span>
-          </div>
-        </div>
+        <img
+          src={product.images[0]}
+          alt={product.name}
+          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        />
 
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-2">

@@ -12,6 +12,7 @@ const ProductDetail: React.FC = () => {
   const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState<'description' | 'ingredients' | 'usage'>('description');
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [addedToCart, setAddedToCart] = useState(false);
 
   const product = products.find(p => p.id === id);
@@ -55,11 +56,11 @@ const ProductDetail: React.FC = () => {
           {/* Product Images */}
           <div className="space-y-4">
             <div className="aspect-square bg-sage-light rounded-2xl overflow-hidden relative">
-              <div className="absolute inset-0 flex items-center justify-center p-12">
-                <span className="font-serif text-3xl text-sage-dark text-center">
-                  {product.name}
-                </span>
-              </div>
+              <img
+                src={product.images[selectedImageIndex] || product.images[0]}
+                alt={product.name}
+                className="w-full h-full object-cover"
+              />
               {product.bestseller && (
                 <span className="absolute top-4 left-4 bg-accent text-accent-foreground text-sm font-medium px-3 py-1.5 rounded-full">
                   Bestseller
@@ -74,12 +75,19 @@ const ProductDetail: React.FC = () => {
 
             {/* Thumbnail strip */}
             <div className="flex gap-3">
-              {[1, 2, 3].map((i) => (
+              {product.images.map((image, i) => (
                 <button
                   key={i}
-                  className="w-20 h-20 bg-sage-light/50 rounded-lg border-2 border-primary flex items-center justify-center"
+                  onClick={() => setSelectedImageIndex(i)}
+                  className={`w-20 h-20 rounded-lg border-2 overflow-hidden ${
+                    selectedImageIndex === i ? 'border-primary' : 'border-border'
+                  }`}
                 >
-                  <span className="text-xs text-sage-dark">View {i}</span>
+                  <img
+                    src={image}
+                    alt={`${product.name} view ${i + 1}`}
+                    className="w-full h-full object-cover"
+                  />
                 </button>
               ))}
             </div>
